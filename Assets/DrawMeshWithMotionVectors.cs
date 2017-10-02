@@ -35,6 +35,11 @@ public class DrawMeshWithMotionVectors: MonoBehaviour
 
     void OnRenderObject()
     {
+        if ((Camera.current.depthTextureMode & DepthTextureMode.MotionVectors) == 0)
+        {
+            return;
+        }
+    
         _motionVectorMaterial.SetMatrix("_PreviousM", _previousModelMatrix);
         _motionVectorMaterial.SetMatrix("_PreviousVP", CameraMatrixProvider.GetPreviousVPMatrix(Camera.current));
         _motionVectorMaterial.SetMatrix("_NonJitteredVP", CameraMatrixProvider.GetVPMatrix(Camera.current));
